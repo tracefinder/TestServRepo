@@ -11,7 +11,7 @@ import sys
 import time
 from SocketServer import ThreadingMixIn
 
-DEBUG = True       # Turn on debug mode, turn off logging. test.py needs DEBUG = True
+DEBUG = True        # Turn on debug mode, turn off logging. test.py needs DEBUG = True
 running = True      # Flag for stopping the server with command "stop"
 
 
@@ -51,11 +51,11 @@ class MyHandler(BaseHTTPServer.BaseHTTPRequestHandler):
         """Logging commit info."""
         if not DEBUG:
             logging.basicConfig(filename=r'commit.log', level=logging.INFO)
-            logging.info(' START: Server Time: ' + time.asctime() + '\nRepo url: %(repo_url)s\
+            logging.info(' START: Server Time: ' + time.asctime() + '\
             \nRepo: %(repo)s\nBranch: %(branch)s\nHash: %(commit_hash)s\nCommit time: %(time)s\nEND\n' % self.info)
         else:
             print "\nIN DEBUG MODE\n"
-            MyHandler.debug_info = ' START: Server Time: ' + time.asctime() + '\nRepo url: %(repo_url)s\
+            MyHandler.debug_info = ' START: Server Time: ' + time.asctime() + '\
             \nRepo: %(repo)s\nBranch: %(branch)s\nHash: %(commit_hash)s\nCommit time: %(time)s\nEND\n' % self.info
 
 

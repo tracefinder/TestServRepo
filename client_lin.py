@@ -31,13 +31,21 @@ def get_repo_name():
 	else:
 		return os.path.basename(os.path.dirname(os.getcwd()))
 
+#def get_info():
+	#"""Get additional information about commit."""
+	#details = git(['show', '--pretty=format:%s%n%H%n%cd'])
+	#details = details.split('\n')
+	#inf = re.findall(r"'.+'|https://.+", details[0])
+	#inf.extend(details[1:])
+	#return inf
+
 def get_info():
 	"""Get additional information about commit."""
-	details = git(['show', '--pretty=format:%s%n%H%n%cd'])
-	details = details.split('\n')
-	inf = re.findall(r"'.+'|https://.+", details[0])
-	inf.extend(details[1:])
-	return inf
+	details = git(['show', '--pretty=format:"%H<>%cd', '-s'])
+	details = details.split('<>')
+	inf = re.findall(r"\[.+\]", git(['show-branch']))[0]
+	details.append(inf)
+	return details
 
 if '--help' in sys.argv:
 	print """Usage:
@@ -65,12 +73,12 @@ if argc == 2:
 	payload = {'command': command}	
 elif argc == 1:
 	inform = get_info()
+	print inform
 	repo = get_repo_name()
-	repo_url = inform[1]
-	branch = inform[0][1:-1]
-	commit_hash = inform[2]
-	t = inform[3]
-	info = {'commit_hash': commit_hash, 'repo_url': repo_url, 'repo': repo, 'branch': branch,  'time': t}
+	branch = inform[2][1:-1]
+	commit_hash = inform[0]
+	t = inform[1]
+	info = {'commit_hash': commit_hash, 'repo': repo, 'branch': branch,  'time': t}
 	# Commit info -> json format
 	info = json.dumps(info)
 	payload = {'info': info}

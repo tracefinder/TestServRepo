@@ -35,7 +35,7 @@ class TestServer(unittest.TestCase):
 		info = json.dumps(dt)
 		payload = {'info': info}
 		r = requests.post('http://localhost:13000', data=payload)
-		self.assertEqual(tserver.MyHandler.debug_info, ' START: Server Time: ' + time.asctime() + '\nRepo url: %(repo_url)s\
+		self.assertEqual(tserver.MyHandler.debug_info, ' START: Server Time: ' + time.asctime() + '\
             \nRepo: %(repo)s\nBranch: %(branch)s\nHash: %(commit_hash)s\nCommit time: %(time)s\nEND\n' % dt)
 	
 	def tearDown(self):

@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""Test for server.py."""
+"""Test for tserver_lin.py."""
 
 import json
 import requests

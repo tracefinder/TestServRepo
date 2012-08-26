@@ -1,5 +1,5 @@
 #!/usr/bin/python
-"""This script do POST request on SERV_ADDR containing some data about commit."""
+"""This script does POST request containing some data about commit on SERV_ADDR."""
 
 import json
 import os
@@ -12,7 +12,7 @@ import time
 SERV_ADDR = 'http://localhost:13000'
 
 def git(args):
-	"""Work with git via program."""
+	"""Work with git via the program."""
 
 	args = ['git'] + args
 	git = subprocess.Popen(args, stdout = subprocess.PIPE)
@@ -31,16 +31,9 @@ def get_repo_name():
 	else:
 		return os.path.basename(os.path.dirname(os.getcwd()))
 
-#def get_info():
-	#"""Get additional information about commit."""
-	#details = git(['show', '--pretty=format:%s%n%H%n%cd'])
-	#details = details.split('\n')
-	#inf = re.findall(r"'.+'|https://.+", details[0])
-	#inf.extend(details[1:])
-	#return inf
-
 def get_info():
 	"""Get additional information about commit."""
+	
 	details = git(['show', '--pretty=format:"%H<>%cd', '-s'])
 	details = details.split('<>')
 	inf = re.findall(r"\[.+\]", git(['show-branch']))[0]

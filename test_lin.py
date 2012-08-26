@@ -27,11 +27,10 @@ class TestServer(unittest.TestCase):
 		"""Send POST request containing some commit info."""
 
 		repo = 'Repo_Test'
-		repo_url = 'https://test_url'
 		branch = 'Branch_Test'
 		t = time.asctime()
 		commit_hash = '1234567890abcdef'
-		dt = {'commit_hash': commit_hash, 'repo_url': repo_url, 'repo': repo, 'branch': branch,  'time': t}
+		dt = {'commit_hash': commit_hash, 'repo': repo, 'branch': branch,  'time': t}
 		info = json.dumps(dt)
 		payload = {'info': info}
 		r = requests.post('http://localhost:13000', data=payload)
